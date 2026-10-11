@@ -20,12 +20,7 @@ def lambda_handler(event, context):
 
     # 2. Process Data
     df['revenue'] = df['quantity'] * df['price']
-    summary = df.groupby('city')['revenue'].sum().reset_index()
-    summary = summary.sort_values(by='revenue', ascending=False)
-
-    # 3. Prepare Output
-    csv_buffer = io.StringIO()
-    summary.to_csv(csv_buffer, index=False)
+  
     
     date_str = datetime.now().strftime('%Y-%m-%d')
     output_key = f"reports/city_revenue_summary_{date_str}.csv"
